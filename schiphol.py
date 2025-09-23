@@ -8,7 +8,7 @@ BASE_URL = "https://api.schiphol.nl/public-flights"
 
 headers = {
     "Accept": "application/json",
-    "app_id": "709add58",                 # <-- gebruik je eigen keys; deel ze niet publiek 🙂
+    "app_id": "709add58",       
     "app_key": "2c6ef2180d93276ba15cec90dab6143d",
     "ResourceVersion": "v4"
 }
@@ -74,15 +74,18 @@ df = df.sort_values(["datum", "tijd (gepland)"], kind="stable").reset_index(drop
 #plt.hist(df["tijd (gepland)"], bins=100)
 #plt.show()
 
-fig1 = px.histogram(df, x="tijd (gepland)")
+fig1 = px.histogram(df, x="tijd (gepland)", labels={'tijd (gepland)':'Tijd (gepland)'})
+fig1.update_yaxes(title_text="Aantal vluchten")
 fig1.show()
 
-fig2 = px.histogram(df, x="gate")
+fig2 = px.histogram(df, x="gate", labels={'gate':'Gate'})
+fig2.update_yaxes(title_text="Aantal vluchten")
 fig2.show()
 # Tabel tonen
 print(df.to_string(index=False))
 print(len(df))
 
 st.plotly_chart(fig1, use_container_width=True)
+
 
 
